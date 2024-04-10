@@ -43,7 +43,11 @@ const text = (command: DrawText) => {
             continue
         }
 
-        bCtx.putImageData(jumpyFont[char.charCodeAt(0)], currentOffset.x, currentOffset.y)
+        bCtx.putImageData(
+            jumpyFont[char.charCodeAt(0)],
+            currentOffset.x,
+            currentOffset.y
+        )
 
         currentOffset.x += horizAdvance
 

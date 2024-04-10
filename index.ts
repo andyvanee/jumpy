@@ -5,7 +5,9 @@ import {watch} from 'fs'
 const siteDir = 'site'
 
 const buildConfig: BuildConfig = {
-    entrypoints: ['entrypoint.ts', 'worker.ts', 'screen.ts'].map((entry) => path.join(siteDir, entry)),
+    entrypoints: ['entrypoint.ts', 'worker.ts', 'screen.ts'].map((entry) =>
+        path.join(siteDir, entry)
+    ),
     minify: false,
     root: 'site/',
     sourcemap: 'inline',

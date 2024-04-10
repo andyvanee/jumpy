@@ -4,8 +4,12 @@ if (!crossOriginIsolated) {
     throw new Error('Requires cross-origin isolation')
 }
 
-const worker = new Worker(new URL('worker.js', import.meta.url), {type: 'module'})
-const screen = new Worker(new URL('screen.js', import.meta.url), {type: 'module'})
+const worker = new Worker(new URL('worker.js', import.meta.url), {
+    type: 'module',
+})
+const screen = new Worker(new URL('screen.js', import.meta.url), {
+    type: 'module',
+})
 
 const bufferKey = 'luascript'
 const buffers = {
@@ -20,7 +24,10 @@ const offscreen = canvas.transferControlToOffscreen()
 
 const initCmd: ScreenCommand = {cmd: 'init', canvas: offscreen}
 const clearCmd: ScreenCommand = {cmd: 'clear'}
-const textCmd: (_: string) => ScreenCommand = (text: string) => ({cmd: 'text', text})
+const textCmd: (_: string) => ScreenCommand = (text: string) => ({
+    cmd: 'text',
+    text,
+})
 screen.postMessage(initCmd, [offscreen])
 
 if (buffers.code) codeWrapper.value = buffers.code
@@ -65,7 +72,8 @@ codeWrapper.addEventListener('keydown', function (e) {
         var end = this.selectionEnd
 
         // set textarea value to: text before caret + tab + text after caret
-        this.value = this.value.substring(0, start) + '  ' + this.value.substring(end)
+        this.value =
+            this.value.substring(0, start) + '  ' + this.value.substring(end)
 
         // put caret at right position again
         this.selectionStart = this.selectionEnd = start + 2
