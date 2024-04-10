@@ -33,3 +33,32 @@ is an experiment with a different set of goals and tradeoffs.
 -   Built in font: 6 x 8 (+ 4 line height)
 -   Text mode: 70 characters wide (420px text + 60 / 30px gutter)
 -   Text mode: 18 lines high (216px text + 54 / 27px gutter)
+
+## Examples
+
+Random test making use of various os, math and io functions:
+
+```lua
+function factorial (n)
+  if n == 0 then
+    return 1
+  else
+    return n * factorial(n-1)
+  end
+end
+
+local date = os.date("%A, %B %d")
+local home = os.getenv('HOME')
+local a = 15
+local fact = string.format("Factorial of %d: %s", a, factorial(a))
+local text = 'The quick brown fox jumps over the lazy dog.'
+
+print(date, home, fact)
+
+for i=1,40 do
+  io.write(text .. " ")
+end
+
+-- io.write is buffered, so call print to flush the output
+print()
+```
