@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "lib": ["ES2020", "dom", "ESNext"],
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "experimentalDecorators": true,
+        "useDefineForClassFields": false,
+        "moduleDetection": "force",
+        "rootDir": ".",
+        "types": [
+            "bun-types" // add Bun global
+        ]
+    }
+}

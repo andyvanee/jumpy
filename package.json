@@ -1,0 +1,24 @@
+{
+  "name": "jumpy-lua",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest",
+    "sharp": "^0.33.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {},
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 4,
+    "semi": false,
+    "singleQuote": true,
+    "bracketSpacing": false,
+    "arrowParens": "always",
+    "printWidth": 120,
+    "endOfLine": "lf",
+    "useTabs": false
+  }
+}
