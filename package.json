@@ -2,6 +2,12 @@
   "name": "jumpy-lua",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "build": "make",
+    "start": "bun run --watch index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write ."
+  },
   "devDependencies": {
     "bun-types": "latest",
     "sharp": "^0.33.3"
@@ -9,7 +15,9 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "prettier": "^3.2.5"
+  },
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 4,
@@ -17,8 +25,16 @@
     "singleQuote": true,
     "bracketSpacing": false,
     "arrowParens": "always",
-    "printWidth": 120,
+    "printWidth": 80,
     "endOfLine": "lf",
-    "useTabs": false
+    "useTabs": false,
+    "overrides": [
+      {
+        "files": "*.json",
+        "options": {
+          "tabWidth": 2
+        }
+      }
+    ]
   }
 }
