@@ -38,7 +38,7 @@ worker.onmessage = (ev) => {
     if (cmd === 'print') {
         buffers.output.push(output)
         screen.postMessage(clearCmd)
-        screen.postMessage(textCmd(output))
+        screen.postMessage(textCmd(buffers.output.join('\n')))
     }
 
     if (cmd === 'printErr') {
