@@ -1,23 +1,25 @@
 import {jumpyFont} from './assets/jumpyFont'
-
-const canvas = document.querySelector('#screen') as HTMLCanvasElement
-if (!canvas) throw new Error('Canvas not found')
-const ctx = canvas.getContext('2d')
+import {ScreenCommand, DrawText, InitScreen, ScreenState} from './types'
 
 const width = 480
 const height = 270
-Object.assign(canvas, {width, height})
-
 const buffer = new OffscreenCanvas(width, height)
 const bCtx = buffer.getContext('2d', {willReadFrequently: true})
 
-const clear = () => {
-    bCtx.clearRect(0, 0, width, height)
-    ctx.clearRect(0, 0, width, height)
+const state: ScreenState = {
+    canvas: null,
 }
 
-const text = (buffer: string) => {
-    const chars = buffer.split('')
+const init = (command: InitScreen) => {
+    state.canvas = command.canvas
+    Object.assign(state.canvas, {width, height})
+}
+
+const text = (command: DrawText) => {
+    const ctx = state.canvas?.getContext('2d')
+    if (!ctx) return
+
+    const chars = command.text.split('')
     const margin = {x: 30, y: 27}
     const lineHeight = 12
     const horizAdvance = 6
@@ -50,10 +52,29 @@ const text = (buffer: string) => {
             currentOffset.y += lineHeight
         }
     }
+
     ctx.putImageData(bCtx.getImageData(0, 0, width, height), 0, 0)
 }
 
-export const screen = {
-    clear,
-    text,
+const clear = () => {
+    const ctx = state.canvas?.getContext('2d')
+    if (!ctx) return
+    bCtx.clearRect(0, 0, width, height)
+    ctx.clearRect(0, 0, width, height)
+}
+
+onmessage = (ev) => {
+    const command = ev.data as ScreenCommand
+
+    switch (command.cmd) {
+        case 'init':
+            init(command)
+            break
+        case 'text':
+            text(command)
+            break
+        case 'clear':
+            clear()
+            break
+    }
 }
